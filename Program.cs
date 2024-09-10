@@ -13,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<ICadastro, CadastroRepository>();
+builder.Services.AddTransient<IUsuario, UsuarioRepository>();
+
 builder.Services.AddDbContext<ConnectionContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
