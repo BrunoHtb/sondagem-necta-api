@@ -15,6 +15,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ICadastro, CadastroRepository>();
 builder.Services.AddTransient<IUsuario, UsuarioRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirTudo",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+builder.Services.AddControllers();
+
 builder.Services.AddDbContext<ConnectionContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -26,6 +35,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("PermitirTudo");
 
 app.UseHttpsRedirection();
 
