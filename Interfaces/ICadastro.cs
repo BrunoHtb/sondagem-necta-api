@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SondagemNectaAPI.Models;
+using SondagemNectaAPI.ViewModels;
 
 namespace SondagemNectaAPI.Interfaces
 {

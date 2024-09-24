@@ -2,6 +2,7 @@
 using SondagemNectaAPI.Data.Repositories;
 using SondagemNectaAPI.Interfaces;
 using SondagemNectaAPI.Models;
+using SondagemNectaAPI.ViewModels;
 
 namespace SondagemNectaAPI.Controllers
 {
@@ -23,21 +24,47 @@ namespace SondagemNectaAPI.Controllers
             return Ok(cadastro);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Cadastro cadastro)
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
         {
-            if(id != cadastro.Id)
-            {
-                return BadRequest("ID in the URL does not match the ID in the body");
-            }
+            var cadastro = _cadastroRepository.GetById(id);
 
-            var cadastroExistente = _cadastroRepository.GetById(id);
-            if(cadastroExistente == null)
-            {
-                return NotFound("Cadastro Not Found!");
-            }
+            if (cadastro == null) return NotFound();
 
-            _cadastroRepository.Update(cadastro);
+            var cadastroViewModel = new CadastroViewModels
+            {
+                Id = cadastro.Id,
+                Nome = cadastro.NomePonto,
+                Status = cadastro.StatusSondagem,
+                LatitudeUTM = cadastro.LatitudeUTM,
+                LongitudeUTM = cadastro.LongitudeUTM,
+                Rodovia = cadastro.Rodovia,
+                ProfundidadeProgramada = cadastro.ProfundidadeProgramada,
+                ProfundidadeFinal = cadastro.ProfundidadeFinal,
+                Observacao = cadastro.Observacao,
+                Equipe = cadastro.NomeSondadores
+            };
+
+            return Ok(cadastroViewModel);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] CadastroViewModels cadastroViewModel)
+        {
+            var cadastroModel = _cadastroRepository.GetById(id);
+            if (cadastroModel == null) return NotFound();
+
+            cadastroModel.NomePonto = cadastroViewModel.Nome;
+            cadastroModel.StatusSondagem = cadastroViewModel.Status;
+            cadastroModel.LatitudeUTM = cadastroViewModel.LatitudeUTM;
+            cadastroModel.LongitudeUTM = cadastroViewModel.LongitudeUTM;
+            cadastroModel.Rodovia = cadastroViewModel.Rodovia;
+            cadastroModel.ProfundidadeProgramada = cadastroViewModel.ProfundidadeProgramada;
+            cadastroModel.ProfundidadeFinal = cadastroViewModel.ProfundidadeFinal;
+            cadastroModel.Observacao = cadastroViewModel.Observacao;
+            cadastroModel.NomeSondadores = cadastroViewModel.Equipe;
+
+            _cadastroRepository.Update(cadastroModel);
             return NoContent();
         }
 

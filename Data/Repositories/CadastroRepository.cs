@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using SondagemNectaAPI.Interfaces;
 using SondagemNectaAPI.Models;
+using SondagemNectaAPI.ViewModels;
 
 namespace SondagemNectaAPI.Data.Repositories
 {
