@@ -78,5 +78,18 @@ namespace SondagemNectaAPI.Models
 
         [Column("nome_foto_furo_fechado")]
         public string NomeFotoFuroFechado { get; set; }
+
+
+        [Column("caminho_fotos_execucao_sondagem")]
+        public string CaminhoFotoExecucao { get; set; }
+
+        [Column("caminho_fotos_coleta")]
+        public string CaminhoFotoColeta { get; set; }
+
+        [Column("caminho_foto_boletim")]
+        public string CaminhoFotoBoletim { get; set; }
+
+        [Column("caminho_foto_furo_fechado")]
+        public string CaminhoFotoFuroFechado { get; set; }
     }
 }

@@ -26,6 +26,20 @@ namespace SondagemNectaAPI.ViewModels
         public string Observacao { get; set; }
         [Column("nome_sondadores")]
         public string Equipe { get; set; }
-       
+        [Column("descricao_coleta")]
+        public string DescricaoColeta { get; set; }
+
+        [Column("caminho_fotos_execucao_sondagem")]
+        public string CaminhoFotoExecucao { get; set; }
+
+        [Column("caminho_fotos_coleta")]
+        public string CaminhoFotoColeta { get; set; }
+
+        [Column("caminho_foto_boletim")]
+        public string CaminhoFotoBoletim { get; set; }
+
+        [Column("caminho_foto_furo_fechado")]
+        public string CaminhoFotoFuroFechado { get; set; }
+
     }
 }

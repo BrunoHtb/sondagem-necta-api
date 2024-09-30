@@ -42,7 +42,13 @@ namespace SondagemNectaAPI.Controllers
                 ProfundidadeProgramada = cadastro.ProfundidadeProgramada,
                 ProfundidadeFinal = cadastro.ProfundidadeFinal,
                 Observacao = cadastro.Observacao,
-                Equipe = cadastro.NomeSondadores
+                Equipe = cadastro.NomeSondadores,
+                DescricaoColeta = cadastro.DescricaoColeta,
+
+                CaminhoFotoBoletim = cadastro.CaminhoFotoBoletim,
+                CaminhoFotoColeta = cadastro.CaminhoFotoColeta,
+                CaminhoFotoExecucao = cadastro.CaminhoFotoExecucao,
+                CaminhoFotoFuroFechado = cadastro.CaminhoFotoFuroFechado
             };
 
             return Ok(cadastroViewModel);
