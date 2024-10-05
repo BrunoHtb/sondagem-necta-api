@@ -50,25 +50,42 @@ namespace SondagemNectaAPI.Controllers
                 CaminhoFotoExecucao = cadastro.CaminhoFotoExecucao,
                 CaminhoFotoFuroFechado = cadastro.CaminhoFotoFuroFechado
             };
-
             return Ok(cadastroViewModel);
         }
-
+       
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] CadastroViewModels cadastroViewModel)
+        public async Task<IActionResult> Update(int id, [FromForm] CadastroViewModels cadastroViewModel)
         {
             var cadastroModel = _cadastroRepository.GetById(id);
             if (cadastroModel == null) return NotFound();
 
-            cadastroModel.NomePonto = cadastroViewModel.Nome;
-            cadastroModel.StatusSondagem = cadastroViewModel.Status;
-            cadastroModel.LatitudeUTM = cadastroViewModel.LatitudeUTM;
-            cadastroModel.LongitudeUTM = cadastroViewModel.LongitudeUTM;
-            cadastroModel.Rodovia = cadastroViewModel.Rodovia;
-            cadastroModel.ProfundidadeProgramada = cadastroViewModel.ProfundidadeProgramada;
-            cadastroModel.ProfundidadeFinal = cadastroViewModel.ProfundidadeFinal;
-            cadastroModel.Observacao = cadastroViewModel.Observacao;
-            cadastroModel.NomeSondadores = cadastroViewModel.Equipe;
+            cadastroModel.NomePonto = string.IsNullOrEmpty(cadastroViewModel.Nome) ? "" : cadastroViewModel.Nome;
+            cadastroModel.StatusSondagem = string.IsNullOrEmpty(cadastroViewModel.Status) ? "" : cadastroViewModel.Status;
+            cadastroModel.LatitudeUTM = string.IsNullOrEmpty(cadastroViewModel.LatitudeUTM) ? "" : cadastroViewModel.LatitudeUTM;
+            cadastroModel.LongitudeUTM = string.IsNullOrEmpty(cadastroViewModel.LongitudeUTM) ? "" : cadastroViewModel.LongitudeUTM;
+            cadastroModel.Rodovia = string.IsNullOrEmpty(cadastroViewModel.Rodovia) ? "" : cadastroViewModel.Rodovia;
+            cadastroModel.ProfundidadeProgramada = string.IsNullOrEmpty(cadastroViewModel.ProfundidadeProgramada) ? "" : cadastroViewModel.ProfundidadeProgramada;
+            cadastroModel.ProfundidadeFinal = string.IsNullOrEmpty(cadastroViewModel.ProfundidadeFinal) ? "" : cadastroViewModel.ProfundidadeFinal;
+            cadastroModel.Observacao = string.IsNullOrEmpty(cadastroViewModel.Observacao) ? "" : cadastroViewModel.Observacao;
+            cadastroModel.NomeSondadores = string.IsNullOrEmpty(cadastroViewModel.Equipe) ? "" : cadastroViewModel.Equipe;
+            cadastroModel.CaminhoFotoExecucao = string.IsNullOrEmpty(cadastroModel.CaminhoFotoExecucao) ? "" : cadastroViewModel.CaminhoFotoExecucao;
+            cadastroModel.CaminhoFotoColeta = string.IsNullOrEmpty(cadastroViewModel.CaminhoFotoColeta) ? "" : cadastroViewModel.CaminhoFotoColeta;
+
+            foreach (var formFile in Request.Form.Files)
+            {
+                if (formFile.Length > 0)
+                {
+                    var fileName = formFile.FileName;
+                    var subDirectory = $"{cadastroModel.CodigoPonto}_{cadastroModel.Rodovia}";
+                    var pathSubdirectory = Path.Combine("D:\\xampp\\htdocs\\Repositorio\\Dados_SondagemSP_2024", subDirectory);
+                    var path = Path.Combine(pathSubdirectory, fileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
 
             _cadastroRepository.Update(cadastroModel);
             return NoContent();

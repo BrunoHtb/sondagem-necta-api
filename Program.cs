@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SondagemNectaAPI.Data;
 using SondagemNectaAPI.Data.Repositories;
 using SondagemNectaAPI.Interfaces;
+using SondagemNectaAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<ICadastro, CadastroRepository>();
 builder.Services.AddTransient<IUsuario, UsuarioRepository>();
+builder.Services.AddTransient<IRelatorio, RelatorioRepository>();
+builder.Services.AddScoped<IRelatorioService, RelatorioService>();  
+
 
 builder.Services.AddCors(options =>
 {
