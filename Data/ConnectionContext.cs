@@ -15,7 +15,7 @@ namespace SondagemNectaAPI.Data
         public DbSet<Cadastro> Cadastros { get; set; }
         public DbSet<UsuarioApp> UsuariosApp { get; set; }
         public DbSet<UsuarioBackOffice> UsuariosBackOffice { get; set; }
-
+        public DbSet<Tracado> Tracados { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

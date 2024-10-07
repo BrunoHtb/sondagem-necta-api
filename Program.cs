@@ -15,8 +15,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<ICadastro, CadastroRepository>();
 builder.Services.AddTransient<IUsuario, UsuarioRepository>();
+builder.Services.AddTransient<ITracado, TracadoRepository>();
 builder.Services.AddTransient<IRelatorio, RelatorioRepository>();
-builder.Services.AddScoped<IRelatorioService, RelatorioService>();  
+builder.Services.AddScoped<IRelatorioService, RelatorioService>();
 
 
 builder.Services.AddCors(options =>
@@ -39,6 +40,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseCors("PermitirTudo");
 
 app.UseHttpsRedirection();
