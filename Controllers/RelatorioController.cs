@@ -12,10 +12,12 @@ namespace SondagemNectaAPI.Controllers
     public class RelatorioController : ControllerBase
     {
         private readonly IRelatorio _relatorioRepository;
+        private readonly IRelatorioService _relatorioService;
 
-        public RelatorioController(IRelatorio relatorioRepository)
+        public RelatorioController(IRelatorio relatorioRepository, IRelatorioService relatorioService)
         {
             _relatorioRepository = relatorioRepository;
+            _relatorioService = relatorioService;
         }
 
         [HttpGet("listar-relatorio")]
@@ -36,7 +38,7 @@ namespace SondagemNectaAPI.Controllers
 
             return Ok(relatorioViewModels);
         }
-        /*
+
         [HttpPost("gerar-relatorio")]
         public async Task<IActionResult> GerarRelatorio([FromBody] List<int> idsList)
         {
@@ -44,31 +46,50 @@ namespace SondagemNectaAPI.Controllers
             {
                 return BadRequest("A lista de IDs está vazia.");
             }
-            
-            //var documentos = await GerarDocumentosWord(ids);
 
-            using (var ms = new MemoryStream())
+            var documentos = await _relatorioService.GerarRelatorios(idsList);
+            var arquivosGerados = documentos.Select(d => d.NomeArquivo).ToList(); 
+
+            try
             {
-                using (var zip = new ZipArchive(ms, ZipArchiveMode.Create, true))
+                using (var ms = new MemoryStream())
                 {
-                    foreach (var doc in documentos)
+                    using (var zip = new ZipArchive(ms, ZipArchiveMode.Create, true))
                     {
-                        var entry = zip.CreateEntry(doc.FileName);
-
-                        using (var entryStream = entry.Open())
+                        foreach (var doc in documentos)
                         {
-                            await entryStream.WriteAsync(doc.FileContent, 0, doc.FileContent.Length);
+                            var entry = zip.CreateEntry(doc.NomeArquivo);
+
+                            using (var entryStream = entry.Open())
+                            {
+                                await entryStream.WriteAsync(doc.ConteudoArquivo, 0, doc.ConteudoArquivo.Length);
+                            }
+                        }
+                    }
+                    ms.Position = 0;
+
+                    return File(ms.ToArray(), "application/zip", "Relatorios.zip");
+                }
+            }
+            finally
+            {
+                foreach (var arquivo in arquivosGerados)
+                {
+                    if (System.IO.File.Exists(arquivo))
+                    {
+                        try
+                        {
+                            System.IO.File.Delete(arquivo); 
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Erro ao deletar o arquivo {arquivo}: {ex.Message}");
                         }
                     }
                 }
-
-                // Resetar a posição do MemoryStream
-                ms.Position = 0;
-
-                // Retornar o arquivo ZIP
-                return File(ms.ToArray(), "application/zip", "Relatorios.zip");
             }
-            */
+        }
+
     }
 }
 

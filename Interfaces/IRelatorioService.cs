@@ -1,8 +1,9 @@
-﻿namespace SondagemNectaAPI.Interfaces
+﻿using SondagemNectaAPI.Models;
+
+namespace SondagemNectaAPI.Interfaces
 {
     public interface IRelatorioService
     {
-        Task<string> GerarRelatoriosAsync(List<int> ids);
-
+        Task<List<RelatorioGerado>> GerarRelatorios(List<int> ids);
     }
 }

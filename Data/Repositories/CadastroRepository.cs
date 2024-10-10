@@ -31,6 +31,11 @@ namespace SondagemNectaAPI.Data.Repositories
             return _connectionContext.Cadastros.FirstOrDefault(x => x.Id == id);
         }
 
+        public List<Cadastro> GetById(List<int> idsList)
+        {
+            return _connectionContext.Cadastros.Where(c => idsList.Contains(c.Id)).ToList();
+        }
+
         public void Update(Cadastro cadastro)
         {
             var cadastroExistente = _connectionContext.Cadastros.FirstOrDefault(x => x.Id == cadastro.Id);

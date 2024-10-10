@@ -10,7 +10,9 @@ namespace SondagemNectaAPI.Interfaces
 
         List<Cadastro> Get();
 
-        Cadastro GetById(int id); 
+        Cadastro GetById(int id);
+
+        List<Cadastro> GetById(List<int> idsList);
 
         void Update(Cadastro cadastro); 
 
