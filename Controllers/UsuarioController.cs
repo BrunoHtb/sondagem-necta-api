@@ -33,8 +33,8 @@ namespace SondagemNectaAPI.Controllers
         {
             var usuario = _usuarioRepository.GetUserBackOffice().FirstOrDefault(x => x.Login == loginModel.Usuario
                                                                                  && x.Senha == loginModel.Senha);
-            
-            if(usuario == null)
+
+            if (usuario == null)
             {
                 return Unauthorized("Usuário ou senha inválidos");
             }

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SondagemNectaAPI.Models;
-using SondagemNectaAPI.ViewModels;
+﻿using SondagemNectaAPI.Models;
 
 namespace SondagemNectaAPI.Interfaces
 {
@@ -14,7 +12,7 @@ namespace SondagemNectaAPI.Interfaces
 
         List<Cadastro> GetById(List<int> idsList);
 
-        void Update(Cadastro cadastro); 
+        void Update(Cadastro cadastro);
 
         void Delete(int id);
     }

@@ -29,7 +29,7 @@ namespace SondagemNectaAPI.Models
         public string LatitudePrevista { get; set; }
 
         [Column("longitude_prevista_sondagem")]
-        public string LongitudePrevista { get; set ; }
+        public string LongitudePrevista { get; set; }
 
         [Column("latitude_sondagem")]
         public string LatitudeReal { get; set; }
@@ -38,7 +38,7 @@ namespace SondagemNectaAPI.Models
         public string LongitudeReal { get; set; }
 
         [Column("rodovia_sondagem")]
-        public string Rodovia {  get; set; }
+        public string Rodovia { get; set; }
 
         [Column("nome_sondadores")]
         public string NomeSondadores { get; set; }
@@ -74,7 +74,7 @@ namespace SondagemNectaAPI.Models
         public string DescricaoColeta { get; set; }
 
         [Column("nome_foto_boletim")]
-        public string NomeFotoBoletim {  get; set; }
+        public string NomeFotoBoletim { get; set; }
 
         [Column("nome_foto_furo_fechado")]
         public string NomeFotoFuroFechado { get; set; }

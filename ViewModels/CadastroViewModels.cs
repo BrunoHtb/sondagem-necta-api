@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace SondagemNectaAPI.ViewModels
+﻿namespace SondagemNectaAPI.ViewModels
 {
     public class CadastroViewModels
     {
@@ -10,9 +7,9 @@ namespace SondagemNectaAPI.ViewModels
         public string Status { get; set; }
         public string? LatitudeUTM { get; set; }
         public string? LongitudeUTM { get; set; }
-        public string? Rodovia {  get; set; }
+        public string? Rodovia { get; set; }
         public string? ProfundidadeProgramada { get; set; }
-        public string? ProfundidadeFinal {  get; set; }
+        public string? ProfundidadeFinal { get; set; }
         public string? Observacao { get; set; }
         public string? Equipe { get; set; }
         public string? DescricaoColeta { get; set; }

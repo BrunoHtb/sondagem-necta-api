@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SondagemNectaAPI.Data.Repositories;
 using SondagemNectaAPI.Interfaces;
 using SondagemNectaAPI.ViewModels;
 using System.IO.Compression;
-using System.Reflection.Metadata;
 
 namespace SondagemNectaAPI.Controllers
 {
@@ -48,7 +46,7 @@ namespace SondagemNectaAPI.Controllers
             }
 
             var documentos = await _relatorioService.GerarRelatorios(idsList);
-            var arquivosGerados = documentos.Select(d => d.NomeArquivo).ToList(); 
+            var arquivosGerados = documentos.Select(d => d.NomeArquivo).ToList();
 
             try
             {
@@ -79,7 +77,7 @@ namespace SondagemNectaAPI.Controllers
                     {
                         try
                         {
-                            System.IO.File.Delete(arquivo); 
+                            System.IO.File.Delete(arquivo);
                         }
                         catch (Exception ex)
                         {

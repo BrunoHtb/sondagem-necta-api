@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SondagemNectaAPI.Data.Repositories;
 using SondagemNectaAPI.Interfaces;
-using SondagemNectaAPI.Models;
 using SondagemNectaAPI.ViewModels;
 
 namespace SondagemNectaAPI.Controllers
@@ -52,7 +50,7 @@ namespace SondagemNectaAPI.Controllers
             };
             return Ok(cadastroViewModel);
         }
-       
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] CadastroViewModels cadastroViewModel)
         {

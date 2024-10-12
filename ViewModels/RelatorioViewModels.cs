@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace SondagemNectaAPI.ViewModels
+﻿namespace SondagemNectaAPI.ViewModels
 {
     public class RelatorioViewModels
     {

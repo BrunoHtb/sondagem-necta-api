@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Update.Internal;
-using SondagemNectaAPI.Interfaces;
+﻿using SondagemNectaAPI.Interfaces;
 using SondagemNectaAPI.Models;
-using SondagemNectaAPI.ViewModels;
 
 namespace SondagemNectaAPI.Data.Repositories
 {
@@ -39,7 +36,7 @@ namespace SondagemNectaAPI.Data.Repositories
         public void Update(Cadastro cadastro)
         {
             var cadastroExistente = _connectionContext.Cadastros.FirstOrDefault(x => x.Id == cadastro.Id);
-            if(cadastroExistente != null)
+            if (cadastroExistente != null)
             {
                 cadastroExistente.CodigoPonto = cadastro.CodigoPonto;
                 cadastroExistente.ProfundidadeProgramada = cadastro.ProfundidadeProgramada;
@@ -61,7 +58,7 @@ namespace SondagemNectaAPI.Data.Repositories
         public void Delete(int id)
         {
             var cadastro = _connectionContext.Cadastros.FirstOrDefault(c => c.Id == id);
-            if(cadastro != null)
+            if (cadastro != null)
             {
                 _connectionContext.Cadastros.Remove(cadastro);
                 _connectionContext.SaveChanges();

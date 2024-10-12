@@ -5,7 +5,7 @@ namespace SondagemNectaAPI.Data.Repositories
 {
     public class TracadoRepository : ITracado
     {
-        private readonly ConnectionContext _connectionContext; 
+        private readonly ConnectionContext _connectionContext;
 
         public TracadoRepository(ConnectionContext connectionContext)
         {

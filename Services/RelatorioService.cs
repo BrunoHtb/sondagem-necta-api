@@ -1,16 +1,11 @@
-﻿using SondagemNectaAPI.Data.Repositories;
-using SondagemNectaAPI.Interfaces;
-using SondagemNectaAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using DocumentFormat.OpenXml;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Drawing.Pictures;
-using DocumentFormat.OpenXml.Drawing.Wordprocessing;
+using SondagemNectaAPI.Data.Repositories;
+using SondagemNectaAPI.Interfaces;
+using SondagemNectaAPI.Models;
 using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
 
 namespace SondagemNectaAPI.Services

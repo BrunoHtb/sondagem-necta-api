@@ -6,6 +6,6 @@ namespace SondagemNectaAPI.Models
     public class UsuarioApp : Usuario
     {
         [Column("cargo")]
-        public string Cargo { get;set; }
+        public string Cargo { get; set; }
     }
 }
